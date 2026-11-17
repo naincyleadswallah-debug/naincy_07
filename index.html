@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naincy Pal • Meta Ads Manager & Performance Marketer</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --accent: #f59e0b;
+            --text-dark: #111827;
+            --text-light: #4b5563;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --border: #e2e8f0;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-top: 76px;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section { padding: 5rem 0; }
+
+        /* Typography */
+        h1, h2, h3 { font-weight: 700; color: var(--text-dark); }
+        h1 { font-size: 2.85rem; line-height: 1.2; letter-spacing: -0.02em; }
+        h2 { font-size: 2.25rem; margin-bottom: 0.75rem; letter-spacing: -0.01em; }
+        h3 { font-size: 1.35rem; margin-bottom: 0.75rem; }
+        p { color: var(--text-light); margin-bottom: 1.25rem; font-size: 1.1rem; }
+
+        .section-header {
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+
+        /* Buttons with Motion */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.85rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+        }
+
+        .btn-outline {
+            background-color: var(--white);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        /* Header / Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            letter-spacing: -0.02em;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul { display: flex; gap: 2rem; align-items: center; }
+        nav a { font-weight: 500; font-size: 1rem; color: var(--text-dark); }
+        nav a:not(.btn):hover { color: var(--primary); }
+
+        @media (max-width: 640px) {
+            nav ul li:not(:last-child) { display: none; }
+            h1 { font-size: 2.2rem; }
+        }
+
+        /* Hero Section with Gradient Glow */
+        #hero {
+            background: radial-gradient(circle at 50% 10%, rgba(37, 99, 235, 0.08) 0%, rgba(248, 250, 252, 1) 70%);
+            text-align: center;
+            padding: 6rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            padding: 0.55rem 1.25rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.75rem;
+            border: 1px solid #bfdbfe;
+            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.08);
+        }
+
+        #hero h1 {
+            max-width: 900px;
+            margin: 0 auto 1.25rem;
+        }
+
+        #hero p {
+            max-width: 700px;
+            margin: 0 auto 2.25rem;
+            font-size: 1.15rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* About Section (Clean Text Layout) */
+        #about {
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .about-text-box {
+            background-color: var(--bg-light);
+            padding: 3rem;
+            border-radius: 1.25rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04);
+        }
+
+        .about-text-box p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .about-text-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Skills Section */
+        .grid-3 {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 768px) {
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .skill-card {
+            background-color: var(--white);
+            padding: 2.25rem;
+            border-radius: 1.25rem;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.08);
+        }
+
+        .skill-card:hover::before {
+            opacity: 1;
+        }
+
+        .skill-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.75rem;
+            height: 3.75rem;
+            border-radius: 1rem;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-tag {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding: 0.4rem 0.85rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--border);
+        }
+
+        /* Process Section */
+        #process {
+            background-color: var(--white);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .process-list {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            background-color: var(--bg-light);
+            padding: 2.25rem;
+            border-radius: 1.25rem;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .process-step:hover {
+            border-color: var(--primary);
+            transform: translateX(6px);
+            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.08);
+        }
+
+        .step-num {
+            font-size: 2.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            min-width: 3.5rem;
+            opacity: 0.8;
+        }
+
+        .process-step p {
+            margin-bottom: 0;
+        }
+
+        /* Connect Section */
+        #connect {
+            text-align: center;
+        }
+
+        .connect-card {
+            max-width: 680px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 3rem 2.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.06);
+        }
+
+        .location-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .email-display {
+            font-size: 1.65rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            word-break: break-all;
+        }
+
+        .copy-status {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: #059669;
+            font-weight: 600;
+            min-height: 1.5rem;
+        }
+
+        .quick-form {
+            margin-top: 2.5rem;
+            padding-top: 2.25rem;
+            border-top: 1px solid var(--border);
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.85rem 1.1rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            background-color: var(--bg-light);
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: var(--white);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--white);
+            border-top: 1px solid var(--border);
+            padding: 2.25rem 0;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Naincy <span>Pal</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#connect" class="btn btn-primary" style="padding: 0.6rem 1.35rem;">Connect</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-badge">
+                ✨ Meta Ads Manager • Available for Freelance & Full-Time
+            </div>
+            <h1>Hi, I'm Naincy Pal.<br>Performance-Driven Meta Ads Manager.</h1>
+            <p>I help businesses generate qualified leads and high ROAS sales through strategic Facebook & Instagram ad campaigns, meticulous daily monitoring, and transparent reporting.</p>
+            <div class="btn-group">
+                <a href="mailto:naincypal38@gmail.com?subject=Meta%20Ads%20Inquiry" class="btn btn-primary">Email Me Directly</a>
+                <a href="#process" class="btn btn-outline">See How It Works</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Me</h2>
+                <p>Merging analytical precision from my BCA background with hands-on agency expertise in Meta Ads management.</p>
+            </div>
+
+            <div class="about-text-box">
+                <p>I am <strong>Naincy Pal</strong>, a dedicated Meta Ads Manager based in <strong>Kanpur, Uttar Pradesh</strong>. I hold a Bachelor of Computer Applications (BCA) degree from <strong>Jagran College</strong>, which gives me a strong analytical foundation in tracking, data interpretation, and technical marketing infrastructures like Pixel and Conversions API setup.</p>
+                <p>With practical agency experience working at <strong>Leadswallah</strong>, I specialize in planning, launching, and scaling all major types of Facebook and Instagram ad campaigns—including Lead Generation, Sales & Conversions, Website Traffic, Brand Awareness, Engagement, and Retargeting funnels.</p>
+                <p>From secure client onboarding and audience structuring to daily spend optimization and weekly ROI reporting, I handle the complete advertising cycle to ensure predictable, profitable growth.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2>Core Skills & Expertise</h2>
+                <p>Comprehensive digital marketing competencies built for high-performing ad accounts.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <h3>Campaign Setup</h3>
+                    <p>Advanced campaign architecture built on robust tracking setups and precise audience segmentation.</p>
+                    <div class="skill-list">
+                        <span class="skill-tag">Lead Generation Ads</span>
+                        <span class="skill-tag">Sales & Conversions</span>
+                        <span class="skill-tag">Pixel & CAPI Setup</span>
+                        <span class="skill-tag">Audience Research</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 9l-5 5-4-4-3 3"/></svg>
+                    </div>
+                    <h3>Optimization Strategy</h3>
+                    <p>Rigorous tracking of CTR, CPC, CPM, and CPL to eliminate wasted spend and scale top-performing ad sets.</p>
+                    <div class="skill-list">
+                        <span class="skill-tag">A/B Creative Testing</span>
+                        <span class="skill-tag">CPL & CPA Reduction</span>
+                        <span class="skill-tag">Budget Scaling</span>
+                        <span class="skill-tag">Retargeting Funnels</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    </div>
+                    <h3>Monitoring & Reporting</h3>
+                    <p>Seamless partner onboarding, daily health checks, and actionable weekly insights for total transparency.</p>
+                    <div class="skill-list">
+                        <span class="skill-tag">Secure Partner Access</span>
+                        <span class="skill-tag">Daily Ad Monitoring</span>
+                        <span class="skill-tag">Weekly ROI Reports</span>
+                        <span class="skill-tag">Lead Quality Review</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simple 3-Step Process Section -->
+    <section id="process">
+        <div class="container">
+            <div class="section-header">
+                <h2>Simple 3-Step Working Process</h2>
+                <p>A streamlined workflow from your initial inquiry to live ad delivery and regular reporting.</p>
+            </div>
+
+            <div class="process-list">
+                <div class="process-step">
+                    <div class="step-num">01</div>
+                    <div>
+                        <h3>Send an Email With Your Goal</h3>
+                        <p>Reach out directly at <strong>naincypal38@gmail.com</strong> sharing your business goals, target audience, and primary campaign objectives (leads or sales).</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-num">02</div>
+                    <div>
+                        <h3>Grant Secure Partner Access</h3>
+                        <p>Receive step-by-step guidance to share Meta Business Manager partner access safely to your Ad Account, Page, and Pixel—without ever exposing your passwords.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-num">03</div>
+                    <div>
+                        <h3>Campaign Launch, Daily Monitoring & Reporting</h3>
+                        <p>I launch your targeted ads, maintain daily performance oversight to optimize ad spend efficiency, and deliver concise weekly progress reports.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Connect Section -->
+    <section id="connect">
+        <div class="container">
+            <div class="section-header" style="margin: 0 auto 2.5rem; text-align: center;">
+                <h2>Let's Connect</h2>
+                <p>Open for freelance Meta Ads projects and full-time performance marketing roles.</p>
+            </div>
+
+            <div class="connect-card">
+                <div class="location-badge">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Kanpur, Uttar Pradesh, India
+                </div>
+
+                <div class="email-display" id="emailText">naincypal38@gmail.com</div>
+
+                <div class="btn-group">
+                    <a href="mailto:naincypal38@gmail.com?subject=Meta%20Ads%20Project%20/%20Opportunity" class="btn btn-primary">Email Me Now</a>
+                    <button type="button" class="btn btn-outline" onclick="copyEmail()">Copy Email</button>
+                </div>
+                <div class="copy-status" id="copyStatus"></div>
+
+                <form class="quick-form" onsubmit="sendQuickEmail(event)">
+                    <div class="form-group">
+                        <label for="clientName">Your Name</label>
+                        <input type="text" id="clientName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientEmail">Your Email</label>
+                        <input type="email" id="clientEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clientMessage">Project or Role Details</label>
+                        <textarea id="clientMessage" rows="3" placeholder="Tell me briefly about your business or hiring needs..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message via Email</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2026 Naincy Pal • Meta Ads Manager • Kanpur, Uttar Pradesh • naincypal38@gmail.com</p>
+        </div>
+    </footer>
+
+    <script>
+        function copyEmail() {
+            const email = "naincypal38@gmail.com";
+            navigator.clipboard.writeText(email).then(() => {
+                const status = document.getElementById("copyStatus");
+                status.textContent = "Email copied to clipboard successfully!";
+                setTimeout(() => { status.textContent = ""; }, 3000);
+            });
+        }
+
+        function sendQuickEmail(event) {
+            event.preventDefault();
+            const name = document.getElementById("clientName").value.trim();
+            const email = document.getElementById("clientEmail").value.trim();
+            const message = document.getElementById("clientMessage").value.trim();
+
+            const subject = encodeURIComponent("Meta Ads Inquiry from " + name);
+            const body = encodeURIComponent(
+                "Name: " + name + "\n" +
+                "Email: " + email + "\n\n" +
+                "Message:\n" + message
+            );
+
+            window.location.href = "mailto:naincypal38@gmail.com?subject=" + subject + "&body=" + body;
+        }
+    </script>
+</body>
+</html>
